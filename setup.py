@@ -6,11 +6,11 @@ install_requires = (
     'lxml',
     'psycopg2',
     )
-description = "A set of content population utilities."
+description = "A document population utility for the cnx-archive project."
 
 
 setup(
-    name='cnx-population',
+    name='cnx-populate',
     version='0.1',
     author='Connexions team',
     author_email='info@cnx.org',
@@ -22,7 +22,7 @@ setup(
     include_package_data=True,
     entry_points="""\
     [console_scripts]
-    cnx-archive-populate = cnxpopulation.archive:main
+    cnx-populate = cnxpopulate:main
     """,
     # test_suite=''
     )
