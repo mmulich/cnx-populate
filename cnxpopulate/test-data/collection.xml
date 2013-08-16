@@ -1,0 +1,804 @@
+<?xml version="1.0"?>
+<col:collection xmlns="http://cnx.rice.edu/collxml"
+                xmlns:cnx="http://cnx.rice.edu/cnxml"
+                xmlns:cnxorg="http://cnx.rice.edu/system-info"
+                xmlns:md="http://cnx.rice.edu/mdml"
+                xmlns:col="http://cnx.rice.edu/collxml"
+                xmlns:cnxml="http://cnx.rice.edu/cnxml"
+                xmlns:m="http://www.w3.org/1998/Math/MathML"
+                xmlns:q="http://cnx.rice.edu/qml/1.0"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                xmlns:bib="http://bibtexml.sf.net/"
+                xmlns:cc="http://web.resource.org/cc/"
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xml:lang="en" type="Course">
+  <metadata xmlns:md="http://cnx.rice.edu/mdml"
+          mdml-version="0.5">
+  <!-- WARNING! The 'metadata' section is read only. Do not edit below.
+       Changes to the metadata section in the source will not be saved. -->
+
+  <md:repository>http://cnx.org/content</md:repository>
+  <md:content-url>http://cnx.org/content/col10154/1.20</md:content-url>
+  <md:content-id>col10154</md:content-id>
+  <md:title>Intro to Logic</md:title>
+  
+  
+  <md:version>1.20</md:version>
+  <md:created>2002/10/11</md:created>
+  <md:revised>2008/01/29 15:56:17.096 US/Central</md:revised>
+
+  <md:actors>
+    
+    
+    <md:person userid="ian">
+      <md:firstname>Ian</md:firstname>
+      <md:surname>Barland</md:surname>
+      <md:fullname>Ian Barland</md:fullname>
+      <md:email>ibarland@radford.edu</md:email>
+    </md:person>
+    
+    
+    
+    <md:person userid="matthias">
+      <md:firstname>Matthias</md:firstname>
+      <md:surname>Felleisen</md:surname>
+      <md:fullname>Matthias Felleisen</md:fullname>
+      <md:email>matthias@ccs.neu.edu</md:email>
+    </md:person>
+    
+    
+    
+    <md:person userid="greiner">
+      <md:firstname>John</md:firstname>
+      <md:surname>Greiner</md:surname>
+      <md:fullname>John Greiner</md:fullname>
+      <md:email>greiner@cs.rice.edu</md:email>
+    </md:person>
+    
+    
+    
+    <md:person userid="set">
+      <md:firstname>Sarah</md:firstname>
+      <md:surname>Trowbridge</md:surname>
+      <md:fullname>Sarah Trowbridge</md:fullname>
+      <md:email>set@rice.edu</md:email>
+    </md:person>
+    
+    
+    
+    <md:person userid="phokion">
+      <md:firstname>Phokion</md:firstname>
+      <md:surname>Kolaitis</md:surname>
+      <md:fullname>Phokion Kolaitis</md:fullname>
+      <md:email>kolaitis@cse.ucsc.edu</md:email>
+    </md:person>
+    
+    
+    
+    <md:person userid="moshe">
+      <md:firstname>Moshe</md:firstname>
+      <md:surname>Vardi</md:surname>
+      <md:fullname>Moshe Vardi</md:fullname>
+      <md:email>vardi@cs.rice.edu</md:email>
+    </md:person>
+    
+    
+    
+    <md:person userid="iamjack">
+      <md:firstname>Fuching</md:firstname>
+      <md:surname>Chi</md:surname>
+      <md:fullname>Fuching Chi</md:fullname>
+      <md:email>iamjack@rice.edu</md:email>
+    </md:person>
+    
+  </md:actors>
+  <md:roles>
+    <md:role type="author">ian phokion moshe matthias greiner</md:role>
+    <md:role type="maintainer">ian greiner iamjack set</md:role>
+    <md:role type="licensor">ian phokion moshe matthias greiner</md:role>
+    
+    
+  </md:roles>
+
+  <md:license url="http://creativecommons.org/licenses/by/1.0" />
+  <!-- For information on license requirements for use or modification, see license url in the
+       above <md:license> element.
+       For information on formatting required attribution, see the URL:
+         CONTENT_URL/content_info#cnx_cite_header
+       where CONTENT_URL is the value provided above in the <md:content-url> element.
+  -->
+  
+  
+  
+  
+
+  
+
+  <md:keywordlist>
+    <md:keyword>boolean algebra</md:keyword>
+    <md:keyword>first order logic</md:keyword>
+    <md:keyword>inference rule</md:keyword>
+    <md:keyword>interpretation</md:keyword>
+    <md:keyword>logic</md:keyword>
+    <md:keyword>model</md:keyword>
+    <md:keyword>proof</md:keyword>
+    <md:keyword>proposition</md:keyword>
+    <md:keyword>propositional logic</md:keyword>
+    <md:keyword>quantifier</md:keyword>
+    <md:keyword>truth table</md:keyword>
+  </md:keywordlist>
+
+  <md:subjectlist>
+    <md:subject>Science and Technology</md:subject>
+  </md:subjectlist>
+
+  <md:abstract>An introduction to reasoning with propositional and first-order logic, with applications to computer science.
+
+Part of the TeachLogic Project (www.teachlogic.org).
+</md:abstract>
+
+  <md:language>en</md:language>
+
+  
+
+  
+  <md:homepage>http://www.owlnet.rice.edu/~comp280/</md:homepage>
+  <md:institution>Rice University</md:institution>
+  <md:course-code>COMP 280</md:course-code>
+  <md:instructor>John Greiner</md:instructor>
+
+  <!-- WARNING! The 'metadata' section is read only. Do not edit above.
+       Changes to the metadata section in the source will not be saved. -->
+</metadata>
+
+  <col:parameters>
+    <col:param name="real-imaginary-notation" value="font"/>
+    <col:param name="and-or-notation"
+               value="propositional-logic"/>
+    <col:param name="gradient-notation" value="symbolic"/>
+    <col:param name="mean-notation" value="angle-bracket"/>
+    <col:param name="remainder-notation" value="text"/>
+    <col:param name="conjugate-notation" value="star"/>
+    <col:param name="imaginary-i-notation" value="i"/>
+    <col:param name="scalar-product-notation" value="dot"/>
+    <col:param name="print-font-size" value="10pt"/>
+    <col:param name="curl-notation" value="symbolic"/>
+    <col:param name="for-all-equation-layout"
+               value="symbolic"/>
+    <col:param name="vector-notation" value="bold"/>
+    <col:param name="print-paper-size" value="8.5x11"/>
+    <col:param name="print-font" value="computer-modern"/>
+    <col:param name="print-style" value=""/>
+    <col:param name="print-paragraph-spacing"
+               value="compact"/>
+  </col:parameters>
+  
+  <col:content>
+    
+      
+        
+      <col:subcollection>
+        <md:title>Introduction</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m12727" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.8">
+        <md:title>90 = 100: A Proof</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m10714" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.36">
+        <md:title>the need for proofs</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12072" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.12">
+        <md:title>defining a proof</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>Propositional Logic</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      
+        
+      <col:subcollection>
+        <md:title>A formal vocabulary</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10715" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.58">
+        <md:title>propositions</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12073" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.16">
+        <md:title>formulas</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>Reasoning with truth tables</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10716" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.35">
+        <md:title>using truth tables</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12074" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.7">
+        <md:title>the limitations of truth tables</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>Reasoning with equivalences</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10717" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.40">
+        <md:title>propositional equivalences</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12075" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.12">
+        <md:title>normal forms</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12076" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.10">
+        <md:title>soundness and completeness</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>Reasoning with inference rules</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10718" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.35">
+        <md:title>propositional inference rules</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12077" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.12">
+        <md:title>using subproofs</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12078" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.10">
+        <md:title>the soundness and completeness of inference rules</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12079" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.7">
+        <md:title>proofs and programming</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12080" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.11">
+        <md:title>conclusions</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      <col:module document="m10514" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.57">
+        <md:title>Exercises for Propositional Logic I</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12352" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.20">
+        <md:title>Exercises for Propositional Logic II</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>Relations and Models</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10724" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.25">
+        <md:title>relations</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m10725" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.28">
+        <md:title>properties of relations</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m10726" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.23">
+        <md:title>interpretations</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12741" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.3">
+        <md:title>Nonstandard Interpretations (optional)</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m10727" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.24">
+        <md:title>modeling with relations</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>First-Order Logic</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      
+        
+      <col:subcollection>
+        <md:title>A formal vocabulary</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10728" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.35">
+        <md:title>syntax and semantics of quantifiers</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12081" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.7">
+        <md:title>bound variables, free variables</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m12082" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.5">
+        <md:title>normal forms revisited</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>Reasoning with equivalences</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10729" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.26">
+        <md:title>first-order equivalences</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>Reasoning with inference rules</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10774" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.27">
+        <md:title>first-order inference rules</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      <col:module document="m12353" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.28">
+        <md:title>Exercises for First-Order Logic</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>Conclusion, Acknowledgements</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10775" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.20">
+        <md:title>Logic: Looking Back</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m13613" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="1.1">
+        <md:title>Acknowledgements</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+    
+      
+        
+      <col:subcollection>
+        <md:title>Appendices and Reference Sheets</md:title>
+        
+        
+        
+
+        <col:content>
+          
+    
+      <col:module document="m10540" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.25">
+        <md:title>propositional equivalences</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m10529" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.28">
+        <md:title>propositional inference rules</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m11045" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.18">
+        <md:title>first-order equivalences</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m11046" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.18">
+        <md:title>first-order inference rules</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m10528" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.34">
+        <md:title>propositional axioms for WaterWorld</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m11072" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.12">
+        <md:title>first-order axioms for WaterWorld</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+    
+      <col:module document="m10845" version="latest"
+                  repository="http://cnx.org/content"
+                  cnxorg:version-at-this-collection-version="2.3">
+        <md:title>browser support</md:title>
+        
+        
+        
+      </col:module>
+        
+      
+    
+        </col:content>
+      </col:subcollection>
+    
+  </col:content>
+</col:collection>
