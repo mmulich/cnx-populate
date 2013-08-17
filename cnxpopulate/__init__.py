@@ -229,32 +229,22 @@ class Metadata(MutableMapping):
         return len(self._data) + len(self._special_attrs)
 
 
-class TextFileData(StringIO):
+class FileData(BytesIO):
     """A file object representation that can be controlled."""
+    id = None
 
-
-class BinaryFileData(BytesIO):
-    """A file object representation that can be controlled."""
-
-
-def file_factory(encoding, fb):
-    """Create a *FileData object"""
-    if encoding == 'binary':
-        file = BinaryFileData(fb)
-    else:
-        data = fb.read()
-        if isinstance(data, str):
-            data = unicode(data)
-        file = TextFileData(data)
-    return file
+    # FIXME Do not store the bytes in memory, otherwise this is going to
+    #       consume the system.
+    # TODO Allow initialization from a filesystem file reference. This will
+    #      allow the object to remain thin before persistence in the database.
+    # TODO Save the file as soon as possible. But find a way to rollback.
 
 
 class File:
     """A file associated with a document. This could be the document's
     content or a resource file."""
-    document = None  # A Document object
     id = None  # a uuid.UUID object
-    _file = None  # a *FileData object
+    ##_data = None  # a Data object
     filename = None
     mimetype = None
 
@@ -262,21 +252,12 @@ class File:
         self.filename = filename
         # TODO Guess mimetype with magic.
         self.mimetype = mimetype
+        self._data = None
 
-    def get_file(self):
-        return self._file
-
-    def set_file(self, value):
-        if not isinstance(value, (BinaryFileData, TextFileData,)):
-            raise ValueError("Invalid type '{}' given".format(type(value)))
-        self._file = value
-
-    def del_file(self):
-        # FIXME This isn't really legal, since it would violate database
-        #       constraints.
-        self._file = None
-
-    file = property(get_file, set_file, del_file)
+    @property
+    def data(self):
+        self._data.seek(0)  # FIXME This doesn't feel right.
+        return self._data
 
     def attach_file_buffer(self, fb, encoding=None):
         """Attach the given file buffer (``fb``) as the file data.
@@ -285,8 +266,8 @@ class File:
         """
         if encoding is None:
             encoding = kadabra.guess_encoding(fb)
-        fb.seek(0)
-        self.file = file_factory(encoding, fb)
+        fb.seek(0)  # Just in case...
+        self._data = FileData(fb.read())
 
     @classmethod
     def from_file_buffer(cls, fb, filename, mimetype=None, encoding=None):
@@ -307,6 +288,14 @@ class Files(MutableSequence):
         except IndexError:
             file = None
         return file
+
+    def retrieve_data_by_filename(self, filename):
+        file = self.retrieve_by_filename(filename)
+        try:
+            data = file.data
+        except AttributeError:
+            data = None
+        return data
 
     # Abstract Base Class (ABC) methods
 
@@ -348,16 +337,19 @@ class Collection:
                          type_=COLLECTION_XML):
         """Initializes the class from a file buffer of a collections.xml."""
         obj = cls()
-        # Parse the file buffer to an xml tree.
-        xml_tree = lxml.etree.parse(fb)
-        obj.metadata = Metadata.from_xml(xml_tree.getroot())
+
+        # Put the file into the files sequence for later reference.
         if filename is None:
             filename = type_[0]
         if mimetype is None:
             mimetype = type_[1]
-        fb.seek(0)
         file = File.from_file_buffer(fb, filename, mimetype)
         obj.files.append(file)
+
+        # Parse out the metadata.
+        parse = lxml.etree.parse
+        xml_tree = parse(obj.files.retrieve_data_by_filename(filename))
+        obj.metadata = Metadata.from_xml(xml_tree.getroot())
 
         return obj
 

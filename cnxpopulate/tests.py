@@ -87,3 +87,6 @@ class CollectionTestCase(unittest.TestCase):
 
         # Check the file has been attached to the object.
         self.assertIn('collection.xml', obj.files)
+        file = obj.files.retrieve_by_filename('collection.xml')
+        with open(TEST_COLLECTION_XML, 'r') as fb:
+            self.assertMultiLineEqual(file.data.read(), fb.read())
