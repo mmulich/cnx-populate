@@ -33,6 +33,9 @@ TEST_COLLECTION_LICENSE_ID = 1
 class CollectionTestCase(unittest.TestCase):
     # This test case does not concern itself with a database connection.
 
+    def setUp(self):
+        self.monkey_patch_licenses()
+
     def monkey_patch_licenses(self):
         import cnxpopulate as pkg  # 'import . as <name>' doesn't work. :(
         # Easy way to do this is to say that we have already cached it
@@ -56,12 +59,8 @@ class CollectionTestCase(unittest.TestCase):
         return deliverable
 
     def test_from_file_buffer_loads_metadata(self):
-        # Case to test that a file can be loaded into the model.
-
-        # The License collection object will need to be populated in
-        #   a way that does not involve touching the database.
-        self.monkey_patch_licenses()
-        from . import Licenses
+        # Case to test that a file can be loaded into the model
+        #   and the metadata is parsed out correctly.
 
         # Create the object to be tested.
         from . import Collection
@@ -76,3 +75,15 @@ class CollectionTestCase(unittest.TestCase):
         self.assertEqual(str(obj.metadata.abstract),
                          TEST_COLLECTION_ABSTRACT_TEXT)
         self.assertEqual(obj.metadata.license.id, TEST_COLLECTION_LICENSE_ID)
+
+    def test_from_file_buffer_loads_file(self):
+        # Case to test that a file can be loaded into the model
+        #   and that the file is attached to the model.
+
+        # Create the object to be tested.
+        from . import Collection
+        with open(TEST_COLLECTION_XML, 'r') as fb:
+            obj = Collection.from_file_buffer(fb)
+
+        # Check the file has been attached to the object.
+        self.assertIn('collection.xml', obj.files)

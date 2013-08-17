@@ -3,7 +3,9 @@ from setuptools import setup, find_packages
 
 
 install_requires = (
+    ##'kadabra',
     'lxml',
+    'python-magic',  # Not necessary after a kadabra release.
     'psycopg2',
     )
 description = "A document population utility for the cnx-archive project."

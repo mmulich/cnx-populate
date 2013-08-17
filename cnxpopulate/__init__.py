@@ -5,16 +5,30 @@
 # Public License version 3 (AGPLv3).
 # See LICENCE.txt for details.
 # ###
+from io import BytesIO, StringIO
 try:
-    from collections.abc import MutableMapping
+    from collections.abc import MutableMapping, MutableSequence
 except ImportError:
-    from collections import MutableMapping
+    from collections import MutableMapping, MutableSequence
 import lxml.etree
+
+from . import kadabra
 
 
 __all__ = (
-    'Abstract', 'Collection', 'License', 'Metadata',
+    'Collection',
+    'Abstract', 'File', 'License', 'Metadata',
     'main',
+    )
+
+# Types are formatted in a tuple of default filename and mimetype.
+COLLECTION_XML = ('collection.xml', 'text/xml',)
+COLLECTION_HTML = ('collection.html', 'text/html',)
+# Type sets are formated as tuple lists of available types
+COLLECTION_TYPES = (COLLECTION_XML, COLLECTION_HTML,)
+DOCUMENT_TYPES = (
+    COLLECTION_XML,
+    COLLECTION_HTML,
     )
 
 
@@ -215,19 +229,135 @@ class Metadata(MutableMapping):
         return len(self._data) + len(self._special_attrs)
 
 
+class TextFileData(StringIO):
+    """A file object representation that can be controlled."""
+
+
+class BinaryFileData(BytesIO):
+    """A file object representation that can be controlled."""
+
+
+def file_factory(encoding, fb):
+    """Create a *FileData object"""
+    if encoding == 'binary':
+        file = BinaryFileData(fb)
+    else:
+        data = fb.read()
+        if isinstance(data, str):
+            data = unicode(data)
+        file = TextFileData(data)
+    return file
+
+
+class File:
+    """A file associated with a document. This could be the document's
+    content or a resource file."""
+    document = None  # A Document object
+    id = None  # a uuid.UUID object
+    _file = None  # a *FileData object
+    filename = None
+    mimetype = None
+
+    def __init__(self, filename, mimetype=None):
+        self.filename = filename
+        # TODO Guess mimetype with magic.
+        self.mimetype = mimetype
+
+    def get_file(self):
+        return self._file
+
+    def set_file(self, value):
+        if not isinstance(value, (BinaryFileData, TextFileData,)):
+            raise ValueError("Invalid type '{}' given".format(type(value)))
+        self._file = value
+
+    def del_file(self):
+        # FIXME This isn't really legal, since it would violate database
+        #       constraints.
+        self._file = None
+
+    file = property(get_file, set_file, del_file)
+
+    def attach_file_buffer(self, fb, encoding=None):
+        """Attach the given file buffer (``fb``) as the file data.
+        The encoding type is optional, but provides an indicator for what
+        type of file to store.
+        """
+        if encoding is None:
+            encoding = kadabra.guess_encoding(fb)
+        fb.seek(0)
+        self.file = file_factory(encoding, fb)
+
+    @classmethod
+    def from_file_buffer(cls, fb, filename, mimetype=None, encoding=None):
+        obj = cls(filename, mimetype=mimetype)
+        obj.attach_file_buffer(fb, encoding=encoding)
+        return obj
+
+
+class Files(MutableSequence):
+    """A collection of file objects associated with documents."""
+
+    def __init__(self, files=[]):
+        self._files = files
+
+    def retrieve_by_filename(self, filename):
+        try:
+            file = [f for f in self._files if f.filename == filename][0]
+        except IndexError:
+            file = None
+        return file
+
+    # Abstract Base Class (ABC) methods
+
+    def __getitem__(self, index):
+        return self._files[index]
+
+    def __setitem__(self, index, value):
+        # TODO Check for existance of the file.
+        self._files.insert(index, value)
+
+    def __delitem__(self, index):
+        del self._files[index]
+
+    def __len__(self):
+        return len(self._files)
+
+    def insert(self, index, value):
+        self.__setitem__(index, value)
+
+    # ABC method override(s)
+
+    def __contains__(self, value):
+        if isinstance(value, str) \
+           and self.retrieve_by_filename(value) is not None:
+            return True
+        else:
+            return super(Files, self).__contains__(value)
+
+
 class Collection:
     """A Connexions collection"""
     metadata = None
 
+    def __init__(self):
+        self.files = Files()
+
     @classmethod
-    def from_file_buffer(cls, fb):
+    def from_file_buffer(cls, fb, filename=None, mimetype=None,
+                         type_=COLLECTION_XML):
         """Initializes the class from a file buffer of a collections.xml."""
         obj = cls()
         # Parse the file buffer to an xml tree.
         xml_tree = lxml.etree.parse(fb)
         obj.metadata = Metadata.from_xml(xml_tree.getroot())
-
-        # TODO Need file to hang off this object.
+        if filename is None:
+            filename = type_[0]
+        if mimetype is None:
+            mimetype = type_[1]
+        fb.seek(0)
+        file = File.from_file_buffer(fb, filename, mimetype)
+        obj.files.append(file)
 
         return obj
 
